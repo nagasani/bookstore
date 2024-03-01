@@ -1,0 +1,39 @@
+### Domain Models
+These are the entity classes representing the tables in your database.
+-- `Book.java` - Represents the book entity with attributes like title, author, ISBN, price, etc.
+-- `Author.java` - Represents the author of a book, which could include attributes like name, biography, and a list of books written.
+-- `Category.java` - Represents different categories or genres that books can belong to.
+### Repositories
+Interfaces for data access layer, typically extending `JpaRepository` or `CrudRepository`.
+-- `BookRepository.java` - Interface for CRUD operations on books.
+-- `AuthorRepository.java` - Interface for CRUD operations on authors.
+-- `CategoryRepository.java` - Interface for CRUD operations on categories.
+### Services
+Classes that contain business logic and interact with repositories.
+-- `BookService.java` - Service class for handling book-related business logic.
+-- `AuthorService.java` - Service class for handling author-related business logic.
+-- `CategoryService.java` - Service class for handling category-related business logic.
+### Controllers
+Classes that handle HTTP requests and responses.
+-- `BookController.java` - Controller class for managing book-related HTTP requests.
+-- `AuthorController.java` - Controller class for managing author-related HTTP requests.
+-- `CategoryController.java` - Controller class for managing category-related HTTP requests.
+### DTOs (Data Transfer Objects)
+Optional, used for transferring data between processes.
+-- `BookDTO.java` - A DTO for book data transfer.
+-- `AuthorDTO.java` - A DTO for author data transfer.
+-- `CategoryDTO.java` - A DTO for category data transfer.
+### Mappers
+Optional, used for converting entities to DTOs and vice versa.
+-- `BookMapper.java` - Utility class for converting between `Book` entities and `BookDTO`.
+-- `AuthorMapper.java` - Utility class for converting between `Author` entities and `AuthorDTO`.
+-- `CategoryMapper.java` - Utility class for converting between `Category` entities and `CategoryDTO`.
+
+### Configuration Classes
+Classes for specific configurations like security, database, or custom beans.
+-- `SecurityConfiguration.java` - Configuration for security aspects.
+-- `DatabaseConfiguration.java` - Configuration for database connections.
+### Utility Classes
+Helper classes for common functionalities across the application.
+- `ApiExceptionHandler.java` - For handling and customizing exception responses.
+- `ValidationUtils.java` - Utility class for common validation logic.

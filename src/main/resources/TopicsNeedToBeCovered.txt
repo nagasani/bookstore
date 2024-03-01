@@ -1,0 +1,57 @@
+Spring Boot
+ 1) Why Spring boot
+     Rapid application development
+     Auto configuration and embeded server
+     Port can be change
+     override tomcat
+     To exclude Auto Configuration @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+     @SpringBootApplication include @Configuration, @EnalbleAutoConfiguration, @ComponentScan
+     To access application.properties value in class use @Value("$server.port")
+     @RestController = @controller + @Responsebody(Json Format)
+     @RestController vs @Controller (@Restcontroller is for Rest API and @Controller is for html+CSS+JS)
+     @RequestMapping vs @GetMapping (RequestMapping is for any kind of request(GET/POST/PUT/DELETE) @Getmapping on for get request)
+     spring.profiles.active=dev setting for which environment you are referring.      
+     Actuator -- Need study more
+     Exceptional Handling
+     Transactions Handling
+     Spring boot starters
+      Spring boot starter web
+      spring boot starter jpa
+      spring boot starter security
+      spring boot AOP
+      
+Spring 
+     lightweight
+     DI - Dependency Injection
+     IOC - Creation of objects is controlled by container 
+     AOP - Separation of concerns(supporting functions) such as logging, transaction, security from business logic
+     Configuration Metadata - XML, Annotation, Java Configuration
+       XML - Better Performance, Readability, but Redundancy
+       Annotation - Time saving, low performance, Low readability
+       Java Configuration-
+     Two Containers - Application Context, Bean Factory
+      	     					ApplicationContext              Bean Factory
+        Implementation   		It extends beanFactory           
+        Annotation Based DI     	Yes                      No(Avoid It) 
+        Loading              		Aggressive Loading          Lazy Loading           
+     Two way to inject dependency - setter injection(using getter and setter of bean), Construction Injection (Using Constructor)
+     Bean Life Cycle - Read
+Spring JPA
+Spring Hibernate
+Spring AOP
+Spring Exceptional Handling
+Spring Security
+Spring Rest Services
+Spring Logging
+
+Java
+ Core Java -OOPS
+ Collections - 
+ MultiThreading
+ Java 8 Feature 
+ JMS Kafka
+ 
+Cloud
+ AWS
+ Kubernetes 
+
