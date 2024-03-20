@@ -3,69 +3,118 @@ package com.example.bookstore.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Book {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String title;
 
-	@ManyToOne
-	private Author author;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	// Constructors
-	public Book() {
-	}
+    @NotBlank(message= "Title Cannot be blank")
+    private String title;
 
-	public Book(String title, Author author) {
-		this.title = title;
-		this.author = author;
-	}
+    @Min(value=0, message="Min price shoud be 0")
+    @Max(value=10000, message="Min price shoud be 10000")
+    private double price;
+    
+    private String status; // Added status field
 
-	// Getters and Setters
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
+    private Author author;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToMany
+    @JoinTable(
+      name = "book_category",
+      joinColumns = @JoinColumn(name = "book_id"),
+      inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
 
-	public String getTitle() {
-		return title;
-	}
+    // Constructors
+    public Book() {
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public Book(Long id, String title, double price, Author author, String status) {
+    	this.id = id;
+        this.title = title;
+        this.price = price;
+        this.author = author;
+        this.status = status; // Initialize status
+    }
 
-	// Getter and setter for author
-	public Author getAuthor() {
-		return author;
-	}
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private Set<Category> categories = new HashSet<>();
+    public String getTitle() {
+        return title;
+    }
 
-	// Getter and setter for categories
-	public Set<Category> getCategories() {
-		return categories;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
-	}
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+    
+    public String getStatus() { // Getter for status
+        return status;
+    }
+
+    public void setStatus(String status) { // Setter for status
+        this.status = status;
+    }
+
+    // Additional helper method to associate a book with a category
+    public void addCategory(Category category) {
+        this.categories.add(category);
+        category.getBooks().add(this);
+    }
+
+    // Additional helper method to associate a book with an author
+    public void setAuthorAndLinkToBook(Author author) {
+        setAuthor(author);
+        author.getBooks().add(this);
+    }
 }
+
+

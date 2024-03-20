@@ -10,7 +10,8 @@ Spring Boot
      @RestController = @controller + @Responsebody(Json Format)
      @RestController vs @Controller (@Restcontroller is for Rest API and @Controller is for html+CSS+JS)
      @RequestMapping vs @GetMapping (RequestMapping is for any kind of request(GET/POST/PUT/DELETE) @Getmapping on for get request)
-     spring.profiles.active=dev setting for which environment you are referring.      
+     spring.profiles.active=dev setting for which environment you are referring.  
+     Rest Clients - To get the data from other server we can use RestTemplate      
      Actuator -- Need study more
      Exceptional Handling
      Transactions Handling
@@ -18,8 +19,16 @@ Spring Boot
       Spring boot starter web
       spring boot starter jpa
       spring boot starter security
-      spring boot AOP
-      
+     Spring Authorization
+        JWT Token - only for authorization(once authencated then server issues JWT token) Preferable because its not dependent on one server. Any server can authenticate using signature and certificate
+        Session Based        
+     Spring boot AOP - Study
+      Versioning Rest API
+        - Using request paramas
+        - Header
+        - URI    
+     Spring Cloud - Gateway Study
+     How to create Validators and Custom Annotation - Study
 Spring 
      lightweight
      DI - Dependency Injection
@@ -36,17 +45,37 @@ Spring
         Loading              		Aggressive Loading          Lazy Loading           
      Two way to inject dependency - setter injection(using getter and setter of bean), Construction Injection (Using Constructor)
      Bean Life Cycle - Read
-Spring JPA
-Spring Hibernate
-Spring AOP
-Spring Exceptional Handling
+Spring JPA - Done
+Spring Hibernate Done
+Spring AOP - Aspect Oriented Programming paradigm aiming to segregate cross-cutting functionalities such as logging
+	AOP has interceptors 
+	 Aspect - Aspect is class in which we define Pointcute and Advices
+	 Advice - It's a behaviour that addresses the system wide concerns(Logging, Security Checks, tec..). This behavior
+	          is represented by a method to be executed at a joint point.	
+	 pointcut - A pintcut is a expression that defines at what JoinPints a given advice should be applied.
+	 JoinPoint - Simply put, a JoinPoint is a point in the execution flow of a method where an Aspect(New Behavior) Can be plugged in
+	@Aspect - on the top of the class
+	@Before(value= "execution(* com.some.thing.SMController.*(..))") Denote every method in SMController
+	For Example
+		@Before(value="execution(* com.example.bookstore.controller.BookController.*(..))")
+		public void beforeAdvice(JoinPoint jointPoint) 
+		{
+			System.out.println("Request to "+jointPoint.getSignature()+ " Started at "+new Date());
+		}
+	@After
+	@AfterReturn
+	@AfterThrowing
+	@Around - Most powerfull. It will be executed first
+Spring Exceptional Handling - Pending
 Spring Security
 Spring Rest Services
 Spring Logging
 
 Java
- Core Java -OOPS
+ Core Java -OOPS   
  Collections - 
+ 	FailFast Iterator - Iterator which fail immediately after seeing modification in collection
+ 	FailSafe Iterator - Iterator which dont fail after seeing modification in collection
  MultiThreading
  Java 8 Feature 
  JMS Kafka
