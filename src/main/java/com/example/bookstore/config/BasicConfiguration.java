@@ -46,10 +46,10 @@ public class BasicConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	http.headers(headers -> headers.frameOptions(frameOption -> frameOption.sameOrigin()));
         return http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.GET, "/users","/user",
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.GET, "/users","/user","/user/**",
                                 "/h2-console/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users","/user",
+                        .requestMatchers(HttpMethod.POST, "/users","/user","/user/**",
                                 "/h2-console/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.PUT, "/users","/user","/user/**",
