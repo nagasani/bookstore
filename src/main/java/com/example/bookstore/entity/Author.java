@@ -19,7 +19,7 @@ public class Author {
 
 	private String name;
 	
-	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)	
 	private Set<Book> books = new HashSet<>();
 
 	@Column(length = 4000) // Adjust the length according to your needs

@@ -24,8 +24,7 @@ import jakarta.validation.Valid;
 public class BookController {
 
 	private final BookService bookService;
-
-	@Autowired
+	
 	public BookController(BookService bookService) {
 		this.bookService = bookService;
 	}
