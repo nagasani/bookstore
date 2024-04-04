@@ -47,14 +47,14 @@ public class BookService {
 
     @Transactional
     public Book addBook(Book book) 
-    {
-    	sendBookAsJsonAsync(book);
-    	
+    {    	
     	if(book.getStatus().isEmpty()) 
 		{
 			throw new EmptyInputExcpetion("601", "Input Field Empty");
 		}
-        return bookRepository.save(book);
+    	Book savedBook = bookRepository.save(book);
+    	sendBookAsJsonAsync(savedBook);
+        return savedBook;
     }
     
     @Async

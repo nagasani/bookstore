@@ -2,6 +2,10 @@ package com.example.bookstore.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,6 +44,7 @@ public class Book {
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    @JsonBackReference
     private Set<Category> categories = new HashSet<>();
 
     // Constructors
@@ -53,8 +58,31 @@ public class Book {
         this.author = author;
         this.status = status; // Initialize status
     }
+    
+    
 
-    // Getters and Setters
+    /**
+	 * @param id
+	 * @param title
+	 * @param price
+	 * @param status
+	 * @param author
+	 * @param categories
+	 */
+	public Book(Long id, @NotBlank(message = "Title Cannot be blank") String title,
+			@Min(value = 0, message = "Min price shoud be 0") @Max(value = 10000, message = "Min price shoud be 10000") double price,
+			String status, Author author, Set<Category> categories) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.price = price;
+		this.status = status;
+		this.author = author;
+		this.categories = categories;
+	}
+
+	// Getters and Setters
+    @JsonProperty("id")
     public Long getId() {
         return id;
     }

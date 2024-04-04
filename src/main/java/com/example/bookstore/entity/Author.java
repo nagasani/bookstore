@@ -2,6 +2,7 @@ package com.example.bookstore.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +20,8 @@ public class Author {
 
 	private String name;
 	
-	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)	
+	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference
 	private Set<Book> books = new HashSet<>();
 
 	@Column(length = 4000) // Adjust the length according to your needs

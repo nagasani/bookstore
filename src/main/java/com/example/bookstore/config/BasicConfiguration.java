@@ -55,6 +55,15 @@ public class BasicConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/users","/user","/user/**",
                                 "/h2-console/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/books","/books","api/books**",
+                                "/h2-console/**")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/books","/books","api/books/**",
+                                "/h2-console/**")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/books","/books","api/books/**",
+                                "/h2-console/**")
+                        .permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/users","/user","/user/**",
                                 "/h2-console/**")
                         .permitAll()
@@ -62,7 +71,7 @@ public class BasicConfiguration {
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
-    
+    //http://localhost:8081/api/books/6
     @Bean
     public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
