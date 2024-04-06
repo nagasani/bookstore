@@ -13,4 +13,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	@Modifying
     @Query("UPDATE Book b SET b.status = :status WHERE b.id IN :ids")
     int updateBookStatusBulk(String status, List<Long> ids);
+
+	Book findBookByTitle(String query);
 }

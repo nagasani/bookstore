@@ -1,7 +1,6 @@
 package com.example.bookstore.aop;
 
 import java.util.Date;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -11,20 +10,19 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-
 import com.example.bookstore.entity.Book;
 
 @Aspect
 @Component
 public class BookAspect {
 
-	@Before(value="execution(* com.example.bookstore.controller.BookController.*(..))")
+	@Before(value="execution(* com.example.bookstore.controller.BookController.*(..)) && !execution(* com.example.bookstore.controller.BookController.getBookOfTheMoment(..))")
 	public void beforeAdvice(JoinPoint jointPoint) 
 	{
 		System.out.println("Request to "+jointPoint.getSignature()+ " Started at "+new Date());
 	}
 	
-	@After(value="execution(* com.example.bookstore.controller.BookController.*(..))")
+	@After(value="execution(* com.example.bookstore.controller.BookController.*(..)) && !execution(* com.example.bookstore.controller.BookController.getBookOfTheMoment(..))")
 	public void AfterAdvice(JoinPoint jointPoint) 
 	{
 		System.out.println("Request to "+jointPoint.getSignature()+ " Ended at "+new Date());
