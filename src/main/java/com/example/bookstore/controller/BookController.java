@@ -1,6 +1,7 @@
 package com.example.bookstore.controller;
 
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.bookstore.dto.BookDTO;
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.exception.BookNotFoundException;
+import com.example.bookstore.mapper.BookMapper;
 import com.example.bookstore.service.BookOfTheMomentService;
 import com.example.bookstore.service.BookService;
 import jakarta.validation.Valid;
@@ -94,4 +98,13 @@ public class BookController {
     public Book getBookOfTheMoment() {
         return bookOfTheMomentService.getCurrentBookOfTheMoment();
     }
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<BookDTO> getBookById2(@PathVariable Long id) 
+	{
+        BookDTO bookDTO = bookService.findBookById(id)
+                .map(BookMapper::toDto)
+                .orElseThrow(() -> new BookNotFoundException("Book with ID " + id + " not found"));
+	        return ResponseEntity.ok(bookDTO);
+	}
 }

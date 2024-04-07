@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
@@ -25,5 +26,12 @@ public class BookExceptionHandler {
 		});
 		return new ResponseEntity<Object>( errors, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(BookNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String handleBookNotFoundException(BookNotFoundException ex) {
+        return ex.getMessage();
+    }
 
 }
