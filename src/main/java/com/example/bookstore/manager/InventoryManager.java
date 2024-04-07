@@ -1,7 +1,9 @@
 package com.example.bookstore.manager;
 
 import java.util.concurrent.*;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InventoryManager {
 
     private ExecutorService executorService = Executors.newFixedThreadPool(10);
