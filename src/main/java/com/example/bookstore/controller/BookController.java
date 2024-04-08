@@ -99,7 +99,7 @@ public class BookController {
         return bookOfTheMomentService.getCurrentBookOfTheMoment();
     }
 	
-	@GetMapping("/{id}")
+	@GetMapping("/id2/{id}")
 	public ResponseEntity<BookDTO> getBookById2(@PathVariable Long id) 
 	{
         BookDTO bookDTO = bookService.findBookById(id)
