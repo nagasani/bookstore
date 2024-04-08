@@ -67,6 +67,9 @@ public class BasicConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/users","/user","/user/**",
                                 "/h2-console/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/upload","/upload/**",
+                                "/h2-console/**")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .build();
