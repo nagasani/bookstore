@@ -77,7 +77,7 @@ public class BookService {
         {
             logger.error("Error converting book to JSON", e);
             return;
-        }
+        }        
         CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("new-books", bookJson);
         future.whenComplete((result, ex) -> {
             if (ex == null) {
@@ -85,8 +85,7 @@ public class BookService {
                     "] with offset=[" + result.getRecordMetadata().offset() + "]");
             } else {
             	logger.info("Unable to send message=[" + 
-            			book.getTitle() + "] due to : " + ex.getMessage());
-                
+            			book.getTitle() + "] due to : " + ex.getMessage());                
             }
         });
     }

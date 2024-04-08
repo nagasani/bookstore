@@ -3,18 +3,16 @@ package com.example.bookstore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.bookstore.misc.Car;
-
 @SpringBootApplication()
 //@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableScheduling
-@EnableEurekaClient
+//@EnableEurekaClient
+//@EnableDiscoveryClient
 public class BookstoreApplication {
 
 	public static void main(String[] args) {

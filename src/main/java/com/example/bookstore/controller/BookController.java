@@ -18,7 +18,9 @@ import com.example.bookstore.entity.Book;
 import com.example.bookstore.exception.BookNotFoundException;
 import com.example.bookstore.mapper.BookMapper;
 import com.example.bookstore.service.BookOfTheMomentService;
+import com.example.bookstore.service.BookRequestService;
 import com.example.bookstore.service.BookService;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -28,11 +30,13 @@ public class BookController {
 
 	private final BookService bookService;
 	private final BookOfTheMomentService bookOfTheMomentService;
+	private final BookRequestService bookRequestService;
 	
-	public BookController(BookService bookService,  BookOfTheMomentService bookOfTheMomentService) 
+	public BookController(BookService bookService,  BookOfTheMomentService bookOfTheMomentService, BookRequestService bookRequestService) 
 	{
 		this.bookService = bookService;
 		this.bookOfTheMomentService = bookOfTheMomentService;
+		this.bookRequestService = bookRequestService;
 	}
 
 	@GetMapping
@@ -106,5 +110,18 @@ public class BookController {
                 .map(BookMapper::toDto)
                 .orElseThrow(() -> new BookNotFoundException("Book with ID " + id + " not found"));
 	        return ResponseEntity.ok(bookDTO);
+	}
+	
+	@GetMapping("/id3/{id}")
+	public String getBookCheckRequestResponse(@PathVariable Long id) 
+	{
+		String response = "";
+        try {
+        	response = bookRequestService.requestBookDetails(Long.toString(id));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}              
+        return response;
 	}
 }
