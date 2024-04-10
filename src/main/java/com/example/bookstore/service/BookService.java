@@ -3,15 +3,19 @@ package com.example.bookstore.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.exception.EmptyInputExcpetion;
 import com.example.bookstore.repository.BookRepository;
@@ -46,6 +50,7 @@ public class BookService {
     }
 
     @Transactional
+    @Retryable(maxAttempts = 5, backoff = @Backoff(delay = 2000))
     public Book addBook(Book book) 
     {    	
     	if(book.getStatus().isEmpty()) 
