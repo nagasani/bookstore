@@ -48,7 +48,7 @@ public class UserController {
 
 	@PutMapping(value = "/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public User updateUser(@PathVariable int id, @RequestBody User user) {
+	public User updateUser(@PathVariable Integer id, @RequestBody User user) {
 
 		return this.userService.updateUser(id, user);
 	}

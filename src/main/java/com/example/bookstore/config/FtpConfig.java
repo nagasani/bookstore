@@ -11,6 +11,7 @@ public class FtpConfig {
     private int port;
     private String username;
     private String password;
+    private String enabled;
 
     // Getters and setters
 
@@ -45,4 +46,18 @@ public class FtpConfig {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    /**
+   	 * @return the ftpEnabled
+   	 */
+   	public String getEnabled() {
+   		return enabled;
+   	}
+
+   	/**
+   	 * @param ftpEnabled the ftpEnabled to set
+   	 */
+   	public void setEnabled(String enabled) {
+   		this.enabled = enabled;
+   	}
 }

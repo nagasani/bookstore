@@ -24,7 +24,7 @@ public class BookOfTheMomentService
         return currentBookOfTheMoment;
     }
 
-    @Scheduled(fixedRate = 10000) // 2 hours = 7,200,000 milliseconds
+    @Scheduled(fixedRate = 100000) // 2 hours = 7,200,000 milliseconds
     public void updateBookOfTheMoment() 
     {
         List<Book> allBooks = bookRepository.findAll();

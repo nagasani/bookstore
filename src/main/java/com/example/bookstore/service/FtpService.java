@@ -1,12 +1,11 @@
 package com.example.bookstore.service;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,32 +16,43 @@ public class FtpService {
     private int port;
     private String username;
     private String password;
-
+    private String enabled;
+    
     private FTPClient ftpClient = new FTPClient();
 
     public FtpService(@Value("${ftp.server.address}") String serverAddress,
                       @Value("${ftp.server.port}") int port,
                       @Value("${ftp.server.username}") String username,
-                      @Value("${ftp.server.password}") String password) {
+                      @Value("${ftp.server.password}") String password, 
+                      @Value("${ftp.enabled") String enabled
+                      ) 
+    {
         this.serverAddress = serverAddress;
         this.port = port;
         this.username = username;
         this.password = password;
-
-        try {
-            connectToServer();
-        } catch (IOException e) {
+        this.enabled = enabled;
+        try 
+        {        	
+        	connectToServer();
+        } 
+        catch (IOException e) 
+        {
             System.out.println("Error connecting to FTP server: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void connectToServer() throws IOException {
-        ftpClient.connect(serverAddress, port);
-        ftpClient.login(username, password);
-        ftpClient.enterLocalPassiveMode();
-        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-        System.out.println("Connected to FTP server at " + serverAddress + ":" + port);
+    private void connectToServer() throws IOException 
+    {
+    	if ("true".equals(enabled)) 
+    	{
+	        ftpClient.connect(serverAddress, port);
+	        ftpClient.login(username, password);
+	        ftpClient.enterLocalPassiveMode();
+	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+	        System.out.println("Connected to FTP server at " + serverAddress + ":" + port);
+    	}
     }
 
     public void uploadFile(InputStream InputStream, String remoteFileName) 

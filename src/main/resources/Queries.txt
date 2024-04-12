@@ -1,0 +1,40 @@
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    username VARCHAR(255) UNIQUE,
+    password VARCHAR(255)
+);
+
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20)
+);
+
+CREATE TABLE user_roles (
+    user_id INT,
+    role_id INT,
+    PRIMARY KEY (user_id, role_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+);
+
+INSERT INTO users (firstName, lastName, username, password) VALUES ('John', 'Doe', 'johndoe', 'password123');
+INSERT INTO users (firstName, lastName, username, password) VALUES ('Jane', 'Smith', 'janesmith', 'password456');
+
+INSERT INTO roles (name) VALUES ('ROLE_USER');
+INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
+
+
+
+-- Assuming John Doe is an admin
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 1);
+
+-- Assuming Jane Smith is a user
+INSERT INTO user_roles (user_id, role_id) VALUES (2, 2);
+
+-- If John Doe also has a user role
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
+
+
+
