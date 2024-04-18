@@ -70,10 +70,12 @@ public class BasicConfiguration {
                         .requestMatchers(HttpMethod.POST, "/upload","/upload/**",
                                 "/h2-console/**")
                         .permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()
+                        )
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
+    
     //http://localhost:8081/api/books/6
     @Bean
     public PasswordEncoder passwordEncoder() {

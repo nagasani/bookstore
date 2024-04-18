@@ -3,6 +3,7 @@ package com.example.bookstore.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +56,7 @@ public class UserController {
 
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public void deleteUser(@PathVariable int id) {
 
 		this.userService.delete(id);

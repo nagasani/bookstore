@@ -117,7 +117,36 @@
 		    <groupId>commons-net</groupId>
 		    <artifactId>commons-net</artifactId>
 		    <version>3.8.0</version>
+		</dependency>	
+		 <!-- JWT Support -->
+	    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+	        <groupId>io.jsonwebtoken</groupId>
+	        <artifactId>jjwt-api</artifactId>
+	        <version>0.12.5</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>io.jsonwebtoken</groupId>
+	        <artifactId>jjwt-impl</artifactId>
+	        <version>0.12.5</version>
+	        <scope>runtime</scope>
+	    </dependency>
+	    <dependency>
+	        <groupId>io.jsonwebtoken</groupId>
+	        <artifactId>jjwt-jackson</artifactId> <!-- For JSON processing -->
+	        <version>0.12.5</version>
+	        <scope>runtime</scope>
+	    </dependency>
+	    <dependency>
+  		   <groupId>com.auth0</groupId>
+		   <artifactId>java-jwt</artifactId>
+		   <version>4.4.0</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>

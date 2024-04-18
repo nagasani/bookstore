@@ -2,6 +2,7 @@ package com.example.bookstore.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -51,9 +52,11 @@ public class User
 	public User() {
 	}
 
-	public User(String username, String email, String password) {
+	public User(String username, String password, String role) {
 		this.username = username;
-		this.email = email;
+		//this.email = email;
+		this.roles = new HashSet<Role>();
+		this.roles.add(new Role(ERole.ROLE_ADMIN));
 		this.password = password;
 	}
 
