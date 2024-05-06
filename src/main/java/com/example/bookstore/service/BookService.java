@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.exception.BookNotFoundException;
 import com.example.bookstore.exception.EmptyInputExcpetion;
 import com.example.bookstore.repository.BookRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -47,6 +48,11 @@ public class BookService {
     public Optional<Book> findBookById(Long id) {
     	System.out.println("Rama Raju Nagasani : "+id);
         return bookRepository.findById(id);
+    }
+    
+    public Book findBookById4(Long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Book not found with ID: " + id));
     }
 
     @Transactional
@@ -115,5 +121,15 @@ public class BookService {
     public void bulkUpdateBooksStatus(String status, List<Long> bookIds) {
         int updatedCount = bookRepository.updateBookStatusBulk(status, bookIds);
         System.out.println(updatedCount + " books were updated.");
+    }
+    
+    @Async
+    public CompletableFuture<String> performAsyncTask() {
+        return CompletableFuture.supplyAsync(() -> {
+            if (Math.random() > 0.5) {
+                throw new RuntimeException("Failed!");
+            }
+            return "Success";
+        }).exceptionally(ex -> "Error: " + ex.getMessage());
     }
 }

@@ -17,7 +17,8 @@ public class BookExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<Object> handleMethodArgumentNotValidExpceiotn(MethodArgumentNotValidException ex){
+	public ResponseEntity<Object> handleMethodArgumentNotValidExpceiotn(MethodArgumentNotValidException ex)
+	{
 		Map<String, String> errors = new HashMap<String, String>();
 		ex.getBindingResult().getAllErrors().forEach((error) -> {
 			String fieldName = ((FieldError) error).getField();
@@ -30,7 +31,8 @@ public class BookExceptionHandler {
 	@ExceptionHandler(BookNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public String handleBookNotFoundException(BookNotFoundException ex) {
+    public String handleBookNotFoundException(BookNotFoundException ex) 
+	{
         return ex.getMessage();
     }
 

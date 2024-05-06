@@ -1,7 +1,10 @@
 package com.example.bookstore.exception;
+
 public class BookNotFoundException extends RuntimeException {
 
-    public BookNotFoundException(String message) {
+	private static final long serialVersionUID = 1L;
+
+	public BookNotFoundException(String message) {
         super(message);
     }
 

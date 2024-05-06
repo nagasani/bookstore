@@ -2,19 +2,21 @@ package com.example.bookstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication()
 //@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableScheduling
 //@EnableEurekaClient
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 //@PropertySource("file:${user.dir}/.env")
+@EnableTransactionManagement
 public class BookstoreApplication {
 
 	public static void main(String[] args) {
