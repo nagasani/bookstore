@@ -1,8 +1,6 @@
 package com.example.bookstore.controller;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.bookstore.dto.BookDTO;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.exception.BookNotFoundException;
@@ -22,7 +19,6 @@ import com.example.bookstore.mapper.BookMapper;
 import com.example.bookstore.service.BookOfTheMomentService;
 import com.example.bookstore.service.BookRequestService;
 import com.example.bookstore.service.BookService;
-
 import jakarta.validation.Valid;
 
 @RestController
@@ -42,7 +38,8 @@ public class BookController {
 	}
 
 	@GetMapping
-	public List<Book> getAllBooks() {
+	public List<Book> getAllBooks() 
+	{
 		return bookService.findAllBooks();
 	}
 

@@ -36,5 +36,18 @@ INSERT INTO user_roles (user_id, role_id) VALUES (2, 2);
 -- If John Doe also has a user role
 INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
 
+CREATE TABLE reviews (
+    review_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    book_id BIGINT NOT NULL,
+    user_id INT NOT NULL,
+    rating INT NOT NULL,
+    review_text TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (book_id) REFERENCES book(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE=InnoDB;
+
+
 
 
